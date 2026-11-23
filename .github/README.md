@@ -1,5 +1,21 @@
 # RDP-POWER: Remote Desktop Workflow Suite
 
+## Updated workflow A: single test session
+
+Workflow A now reads `TAILSCALE_AUTH_KEY` and `RDP_PASSWORD` from repository **Settings → Secrets and variables → Actions**. Create both secrets before starting it. Passwords and auth keys are not entered into the Run workflow form. The username remains `Bullettemporary`.
+
+1. Open Actions and select the workflow ending in **(A)**.
+2. Start with `rdp_count=1`, `quick_test=false`, and `runtime_minutes=30`. Leave `crd_code` empty for Tailscale + RDP.
+3. Connect your client to the same Tailscale network. Find the IP in **Install + Up Tailscale** or **Enable RDP user + firewall** logs, and connect over RDP using your secret password.
+4. Cancel the workflow when testing is complete. The job has a 360-minute total limit, including setup; the requested runtime is the keep-alive duration only. Save needed test results before ending the job.
+
+A no longer uploads desktop screenshots to Gofile, prints the RDP password, purges Tailscale devices, or dispatches another workflow. It needs no Tailscale API key. RustDesk still installs and launches. No MuMu installation or emulator compatibility has been verified.
+
+**Scope:** B, C, and Stop are legacy workflows and have not been updated. The original documentation below describes those legacy options; its hardcoded credentials, form-based auth keys, purge and cycle instructions do not apply to updated A. Use A for these instructions. Use hosted runners only for testing/development associated with the repository.
+
+---
+
+
 A collection of GitHub Actions workflows to set up temporary remote desktop environments with Tailscale, RustDesk, and optional Chrome Remote Desktop (CRD) access.
 
 ## Features
